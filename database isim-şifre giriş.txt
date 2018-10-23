@@ -1,0 +1,37 @@
+ //set up connection variable
+        String jdbcUrl = "jdbc:mysql://localhost:3306/test?useSSL=false";
+        String user = "root";
+        String pass = "root";
+        String driver = "com.mysql.jdbc.Driver";
+        Connection myConn = null;
+        try {
+            Class.forName(driver);
+            myConn = DriverManager.getConnection(jdbcUrl, user, pass);
+            // System.out.println(" Giriþ Baþarýlý ");
+            String kullanýcý = kAdi.getText();
+            String sifre = kSifre.getText();
+            Statement stmt = myConn.createStatement();
+            String sorgu2 = "select * from test.yeni where ad = '" + kullanýcý + "'and sifre='" + sifre + "'";
+
+            ResultSet rs;
+            rs = stmt.executeQuery(sorgu2);
+            if (rs.next()) {
+                System.out.println("Giriþ baþarýlý");
+                jPanel1.setVisible(true);
+                kSifre.setVisible(false);
+                kAdi.setVisible(false);
+                jLabel1.setVisible(false);
+                jLabel2.setVisible(false);
+                jLabel3.setVisible(true);
+                gonder.setVisible(false);
+
+            } else {
+                System.out.println("Giriþ baþarýsýz");
+                kAdi.setText("");
+                kSifre.setText("");
+            }
+
+        } catch (Exception exc) {
+            System.out.println(" Sistem hatasý ");
+            exc.printStackTrace();
+        }

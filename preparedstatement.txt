@@ -1,0 +1,35 @@
+import javax.swing.plaf.nimbus.State;
+import java.sql.*;
+public class Main {
+    public static void main(String[] args) {
+        String url="jdbc:mysql://localhost:3306/test?useSSL=false";
+        String user="root";
+        String password="root";
+
+        try{
+            Connection myConn=DriverManager.getConnection(url,user,password);
+            PreparedStatement myPreSta=myConn.prepareStatement("insert into user(id,adi,soyadi,yasi) values (?,?,?,?) ");
+            Statement myStmt=myConn.createStatement();
+
+
+         //   PreparedStatement preparedStatement = myConn.prepareStatement(sorgu);
+
+            myPreSta.setInt(1,11);
+            myPreSta.setString(2,"asd");
+            myPreSta.setString(3,"def");
+            myPreSta.setInt(4,99);
+            myPreSta .executeUpdate();
+            System.out.println("degiþti");
+
+            //  myPreSta.setInt(1, '23');
+         //   ResultSet myRes=myPreSta.executeQuery();
+           // while( myRes.next() )
+             //   System.out.println( myRes.getObject(1) );
+
+
+        } catch( Exception exc )
+        {
+            exc.printStackTrace();
+        }
+    }
+}

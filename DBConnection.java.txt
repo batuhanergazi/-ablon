@@ -1,0 +1,26 @@
+package com.mebitech.main;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+
+    public Connection getDBConneciton() {
+        //set up connection variable
+        String jdbcUrl = "jdbc:mysql://localhost:3306/test?useSSL=false";
+        String user = "root";
+        String pass = "root";
+        String driver = "com.mysql.jdbc.Driver";
+        Connection myConn = null;
+        try {
+            Class.forName(driver);
+            myConn = DriverManager.getConnection(jdbcUrl, user, pass);
+            System.out.println("DBConnection successful!!!");
+        } catch (Exception exc) {
+            System.out.println("DBConnection Error");
+            exc.printStackTrace();
+        }
+        return myConn;
+    }
+}
